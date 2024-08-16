@@ -1,3 +1,5 @@
+using ApiProject.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,8 @@ builder.Configuration
 	.SetBasePath(env.ContentRootPath)
 	.AddJsonFile("appsettings.json", optional: false)
 	.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+builder.Services.AddPersistence(builder.Configuration); //buradaki configuration set edildikten sonra cagirilacak. satir yeri onemli!
 	
 var app = builder.Build();
 

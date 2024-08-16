@@ -17,7 +17,7 @@ namespace ApiProject.Persistence.Context
 
         public DbSet<Brand>	Brands { get; set; }
         public DbSet<Detail> Details { get; set; }
-        public DbSet<Category> Categorys { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

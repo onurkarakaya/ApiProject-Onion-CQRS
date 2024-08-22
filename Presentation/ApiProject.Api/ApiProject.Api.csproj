@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\ApiProject.Mapper\ApiProject.Mapper.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ApiProject.Persistence\ApiProject.Persistence.csproj" />
   </ItemGroup>
 

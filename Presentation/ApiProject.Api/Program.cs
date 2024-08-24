@@ -1,6 +1,7 @@
 using ApiProject.Persistence;
 using ApiProject.Application;
 using ApiProject.Mapper;
+using ApiProject.Application.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
+app.ConfigureExceptionHandlingMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();

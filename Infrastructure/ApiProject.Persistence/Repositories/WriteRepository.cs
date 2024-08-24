@@ -40,5 +40,10 @@ namespace ApiProject.Persistence.Repositories
 		{
 			await Task.Run(() => _dbSet.Remove(entity));
 		}
+
+		public async Task HardDeleteRangeAsync(IList<T> entities)
+		{
+			await Task.Run(() => _dbSet.RemoveRange(entities));
+		}
 	}
 }

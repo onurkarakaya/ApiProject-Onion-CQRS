@@ -36,7 +36,8 @@ namespace ApiProject.Application.Features.Products.Queries.GetAllProducts
 				m.Price -= (m.Price * m.Discount / 100);
 			}
 
-			return map;
+			//return map;
+			throw new Exception("Hata mesaji");
 		}
 	}
 }

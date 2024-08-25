@@ -42,8 +42,7 @@ namespace ApiProject.Application.Exceptions
 
 			List<string> errors = new List<string>()
 			{
-				$"Hata mesaji: {exception.Message}",
-				$"Hata aciklamasi: {exception.InnerException?.ToString()}"
+				$"Hata mesaji: {exception.Message}"
 			};
 
 			return httpContext.Response.WriteAsync(new ExceptionModel

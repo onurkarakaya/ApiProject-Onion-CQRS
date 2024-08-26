@@ -1,4 +1,5 @@
 using ApiProject.Persistence;
+using ApiProject.Infrastructure;
 using ApiProject.Application;
 using ApiProject.Mapper;
 using ApiProject.Application.Exceptions;
@@ -20,6 +21,7 @@ builder.Configuration
 	.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
 builder.Services.AddPersistence(builder.Configuration); //buradaki configuration set edildikten sonra cagirilacak. satir yeri onemli!
+builder.Services.AddInfrastructure(builder.Configuration); 
 builder.Services.AddApplication();
 builder.Services.AddCustomMapper();
 

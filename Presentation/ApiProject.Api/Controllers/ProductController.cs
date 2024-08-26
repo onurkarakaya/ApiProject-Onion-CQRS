@@ -3,6 +3,7 @@ using ApiProject.Application.Features.Products.Command.DeleteProduct;
 using ApiProject.Application.Features.Products.Command.UpdateProduct;
 using ApiProject.Application.Features.Products.Queries.GetAllProducts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace ApiProject.Api.Controllers
 {
 	[Route("api/[controller]/[action]")]
 	[ApiController]
+	
 	public class ProductController : ControllerBase
 	{
 		private readonly IMediator _mediator;
@@ -20,6 +22,7 @@ namespace ApiProject.Api.Controllers
         }
 
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> GetAllProducts()
 		{
 			var response = await _mediator.Send(new GetAllProductsQueryRequest());

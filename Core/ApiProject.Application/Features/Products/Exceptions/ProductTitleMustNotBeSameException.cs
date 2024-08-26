@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiProject.Application.Features.Products.Exceptions
 {
-	public class ProductTitleMustNotBeSameException : BaseExceptions
+	public class ProductTitleMustNotBeSameException : BaseException
 	{
         public ProductTitleMustNotBeSameException() : base("Urun basligi zaten var!")
         {

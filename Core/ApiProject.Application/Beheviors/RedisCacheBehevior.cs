@@ -15,7 +15,7 @@ namespace ApiProject.Application.Beheviors
 
 		public RedisCacheBehevior(IRedisCacheService redisCacheService)
 		{
-			_redisCacheService = redisCacheService;
+			_redisCacheService = redisCacheService; 
 		}
 
 		public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

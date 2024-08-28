@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiProject.Infrastructure.RedisCache
 {
-	internal class RedisCacheSettings
+	public class RedisCacheSettings
 	{
+		public string ConnectionString { get; set; }
+		public string InstanceName { get; set; }
 	}
 }

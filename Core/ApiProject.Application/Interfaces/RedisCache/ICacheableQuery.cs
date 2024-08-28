@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiProject.Application.Interfaces.RedisCache
 {
-	internal interface ICacheableQuery
+	public interface ICacheableQuery
 	{
+		string CacheKey { get; }
+		double CacheTime { get; }
 	}
 }

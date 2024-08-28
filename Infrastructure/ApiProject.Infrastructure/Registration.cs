@@ -1,4 +1,6 @@
-﻿using ApiProject.Application.Interfaces.Tokens;
+﻿using ApiProject.Application.Interfaces.RedisCache;
+using ApiProject.Application.Interfaces.Tokens;
+using ApiProject.Infrastructure.RedisCache;
 using ApiProject.Infrastructure.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,10 @@ namespace ApiProject.Infrastructure
 		{
 			services.Configure<TokenSettings>(configuration.GetSection("JWT"));
 			services.AddTransient<ITokenService, TokenService>();
+
+			services.Configure<RedisCacheSettings>(configuration.GetSection("RedisCacheSettings"));
+			services.AddTransient<IRedisCacheService, RedisCacheService>();
+
 			services.AddAuthentication(opt =>
 			{
 				opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,6 +43,12 @@ namespace ApiProject.Infrastructure
 					ValidAudience = configuration["JWT:Audience"],
 					ClockSkew = TimeSpan.Zero
 				};
+			});
+
+			services.AddStackExchangeRedisCache(opt =>
+			{
+				opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
+				opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
 			});
 		}
 	}

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiProject.Application.Interfaces.RedisCache
 {
-	internal interface IRedisCacheI
+	public interface IRedisCacheService
 	{
+		Task<T> GetAsync<T>(string key);
+		Task SetAsync<T>(string key, T value, DateTime? expirationTime = null);
 	}
 }

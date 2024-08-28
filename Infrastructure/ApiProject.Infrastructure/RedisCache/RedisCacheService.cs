@@ -1,6 +1,7 @@
 ﻿using ApiProject.Application.Interfaces.RedisCache;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace ApiProject.Infrastructure.RedisCache
 		private readonly ConnectionMultiplexer _redisConnection;
 		private readonly IDatabase _database;
 		private readonly RedisCacheSettings _settings;
-
 		public RedisCacheService(IOptions<RedisCacheSettings> options)
 		{
 			_settings = options.Value;
@@ -23,15 +23,19 @@ namespace ApiProject.Infrastructure.RedisCache
 			_redisConnection = ConnectionMultiplexer.Connect(opt);
 			_database = _redisConnection.GetDatabase();
 		}
-
-		public Task<T> GetAsync<T>(string key)
+		public async Task<T> GetAsync<T>(string key)
 		{
-			throw new NotImplementedException();
+			var value = await _database.StringGetAsync(key);
+			if (value.HasValue)
+				return JsonConvert.DeserializeObject<T>(value);
+
+			return default;
 		}
 
-		public Task SetAsync<T>(string key, T value, DateTime? expirationTime = null)
+		public async Task SetAsync<T>(string key, T value, DateTime? expirationTime = null)
 		{
-			throw new NotImplementedException();
+			TimeSpan timeUnitExpiration = expirationTime.Value - DateTime.Now;
+			await _database.StringSetAsync(key, JsonConvert.SerializeObject(value), timeUnitExpiration);
 		}
 	}
 }

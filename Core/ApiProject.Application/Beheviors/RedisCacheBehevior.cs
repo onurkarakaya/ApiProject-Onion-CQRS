@@ -1,5 +1,6 @@
 ﻿using ApiProject.Application.Interfaces.RedisCache;
 using MediatR;
+using SendGrid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,8 @@ namespace ApiProject.Application.Beheviors
 					await _redisCacheService.SetAsync(cacheKey, response, DateTime.Now.AddMinutes(cacheTime));
 				}
 			}
-			throw new NotImplementedException();
+			
+			return await next();
 		}
 	}
 }

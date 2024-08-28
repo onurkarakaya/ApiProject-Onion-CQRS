@@ -1,4 +1,5 @@
 ﻿using ApiProject.Application.Bases;
+using ApiProject.Application.Exceptions;
 using ApiProject.Application.Features.Auth.Exceptions;
 using ApiProject.Domain.Entities;
 using System;
@@ -36,6 +37,16 @@ namespace ApiProject.Application.Features.Auth.Rules
 			if (expiryDate <= DateTime.Now)
 			{
 				throw new RefreshTokenShouldNotBeExpiredException();
+			}
+
+			return Task.CompletedTask;
+		}
+
+		public Task EmailAddressShouldBeValid(User? user)
+		{
+			if (user is null)
+			{
+				throw new EmailAddressShouldBeValidException();
 			}
 
 			return Task.CompletedTask;
